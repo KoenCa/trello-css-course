@@ -28,12 +28,19 @@
     background-color: var(--color-grey-dark-1);
 
     flex: 0 0 18%; // Define the width and no grow and no shrink
+
+    display: flex;
+    flex-direction: column; // Set main axis (left to right) from top to bottom
+    justify-content: space-between; // Push legal text to bottom (2 flex items so it pushes top and bottom)
 }
 
 //Flex item
 .hotel-view {
     background-color: #fff;
+
+    // TEST
     background-color: orangered;
+    height: 80rem;
 
     flex: 1; // Grow as much as it can
 }
