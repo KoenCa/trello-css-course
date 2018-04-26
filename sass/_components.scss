@@ -125,18 +125,64 @@
 ////////////////////////////////////////////
 // SIDE NAVIGATION
 .side-nav {
+    font-size: 1.4rem;
+    list-style-type: none;
+    margin-top: 3.5rem;
 
     &__item {
+        position: relative; // Also needed for the before pseudo element
 
+        &:not(:last-child) {
+            margin-bottom: .5rem;
+        }
     }
 
-    &__link {
+    &__item::before {
+        content: ''; //Needed to show up in browser
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 3px;
+        background-color: var(--color-primary);
+        transform: scaleY(0); //Invisible at first
 
+        // First transform and after that the width
+        transition: transform .2s,
+                    width .4s cubic-bezier(1, 0, 0 ,1) .2s,
+                    background-color .1s; // For the :active state
+    }
+
+    &__item:hover::before,
+    &__item--active::before {
+        transform: scaleY(1); // Grow and make visible on hover
+        width: 100%;
+    }
+
+    &__item:active::before {
+        background-color: var(--color-primary-ligth);
+    }
+
+    &__link:link,
+    &__link:visited {
+        color: var(--color-grey-light-1);
+        text-decoration: none;
+        text-transform: uppercase;
+        display: block;
+        padding: 1.5rem 3rem;
+        position: relative; // Specified for z-index
+        z-index: 10;
+
+        // Align our link text and icons vertically in the center
+        display: flex;
+        align-items: center;
     }
 
     &__icon {
         width: 1.75rem;
         height: 1.75rem;
+        margin-right: 2rem;
+        fill: currentColor; // Use color of the parent element, also changes with event like hover
     }
 }
 
