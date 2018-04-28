@@ -19,7 +19,6 @@
     @media only screen and (max-width: $bp-smallest) {
         order: 1; // Set search as last element
         flex: 0 0 100%; // Give the search bar the full width
-        background-color: var(--color-grey-light-2);
     }
 
     &__input {
@@ -32,7 +31,10 @@
         border-radius: 100px; // High value for round borders.
         width: 90%;
         transition: all .2s;
-        margin-right: -3.25rem;
+
+        @media only screen and (max-width: $bp-smallest) {
+            margin-left: -1.2rem;
+        }
 
         &:focus {
             outline: none;
@@ -54,6 +56,7 @@
     &__button {
         border: none;
         background-color: var(--color-grey-light-2);
+        margin-left: -3.25rem;
 
         &:focus {
             outline: none;
@@ -119,6 +122,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
+        @media only screen and (max-width: $bp-smallest) {
+            top: 0;
+        }
     }
 
     &__user-photo {
@@ -256,6 +263,11 @@
     align-items: center; // vertically align across cross axis
     border-bottom: var(--line);
 
+    @media only screen and (max-width: $bp-smallest) {
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
     &__heading {
         font-size: 2.25rem;
         font-weight: 300;
@@ -267,11 +279,20 @@
             font-size: 1.8rem;
             padding: 1.25rem 2rem;
         }
+
+        @media only screen and (max-width: $bp-smallest) {
+            font-size: 1.6rem;
+            padding: 1.25rem 0;
+        }
     }
 
     &__stars {
         display: flex; // less spacing and no whitespace underneath
         margin-right: auto; // let element only occupy space it needs and margin takes up rest of space
+
+        @media only screen and (max-width: $bp-smallest) {
+            margin-right: 0;
+        }
     }
 
     &__icon-star,
@@ -305,6 +326,11 @@
 
         @media only screen and (max-width: $bp-small) {
             padding: 0 1.5rem;
+        }
+
+        @media only screen and (max-width: $bp-smallest) {
+            flex: 0 0 100%; // Make sure it wraps to last line
+            margin-left: 0;
         }
     }
 
