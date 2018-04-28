@@ -16,6 +16,12 @@
     align-items: center;
     justify-content: center;
 
+    @media only screen and (max-width: $bp-smallest) {
+        order: 1; // Set search as last element
+        flex: 0 0 100%; // Give the search bar the full width
+        background-color: var(--color-grey-light-2);
+    }
+
     &__input {
         font-family: inherit;
         font-size: inherit;
@@ -129,11 +135,25 @@
     list-style-type: none;
     margin-top: 3.5rem;
 
+    @media only screen and (max-width: $bp-medium) {
+        display: flex;
+        margin: 0;
+    }
+
     &__item {
         position: relative; // Also needed for the before pseudo element
 
         &:not(:last-child) {
             margin-bottom: .5rem;
+
+            @media only screen and (max-width: $bp-medium) {
+                margin: 0;
+            }
+        }
+
+        @media only screen and (max-width: $bp-medium) {
+            flex: 1;
+            margin: 0;
         }
     }
 
@@ -176,6 +196,16 @@
         // Align our link text and icons vertically in the center
         display: flex;
         align-items: center;
+
+        @media only screen and (max-width: $bp-medium) {
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        @media only screen and (max-width: $bp-small) {
+            flex-direction: column;
+            padding: 1.5rem .5rem;
+        }
     }
 
     &__icon {
@@ -183,6 +213,13 @@
         height: 1.75rem;
         margin-right: 2rem;
         fill: currentColor; // Use color of the parent element, also changes with event like hover
+
+        @media only screen and (max-width: $bp-small) {
+            margin-right: 0;
+            margin-bottom: .7rem;
+            width: 1.5rem;
+            height: 1.5rem;
+        }
     }
 }
 
@@ -193,6 +230,10 @@
     color: var(--color-grey-light-4);
     text-align: center;
     padding: 2.5rem;
+
+    @media only screen and (max-width: $bp-medium) {
+        display: none;
+    }
 }
 
 ////////////////////////////////////////////
@@ -221,6 +262,11 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         padding: 1.5rem 3rem;
+
+        @media only screen and (max-width: $bp-small) {
+            font-size: 1.8rem;
+            padding: 1.25rem 2rem;
+        }
     }
 
     &__stars {
@@ -256,21 +302,29 @@
         flex-direction: column; // Dont show items side by side
         align-items: center;
         justify-content: center;
+
+        @media only screen and (max-width: $bp-small) {
+            padding: 0 1.5rem;
+        }
     }
 
     &__rating-average {
         font-size: 2.25rem;
         font-weight: 300;
         margin-bottom: -3px;
+
+        @media only screen and (max-width: $bp-small) {
+            font-size: 1.8rem;
+        }
     }
 
     &__rating-count {
         font-size: .8rem;
         text-transform: uppercase;
-    }
 
-    &__rating-count {
-
+        @media only screen and (max-width: $bp-small) {
+            font-size: .5rem;
+        }
     }
 }
 
@@ -356,15 +410,18 @@
         margin-right: .7rem;
 
         //Older browsers
-        // background-image: url(../img/chevron-thin-right.svg); // Path from style.css
-        // background-size: cover;
+        background-image: url(../img/chevron-thin-right.svg); // Path from style.css
+        background-size: cover;
 
-        // Newer browsers - masks => Way to give svg icon color via CSS
-        background-color: var(--color-primary);
-        -webkit-mask-image: url(../img/chevron-thin-right.svg); // Path from style.css
-        -webkit-mask-size: cover;
-        mask-image: url(../img/chevron-thin-right.svg); // Path from style.css
-        mask-size: cover;
+        @supports (-webkit-mask-image: url()) or (mask-image: url()) {
+            // Newer browsers - masks => Way to give svg icon color via CSS
+            background-color: var(--color-primary);
+            -webkit-mask-image: url(../img/chevron-thin-right.svg); // Path from style.css
+            -webkit-mask-size: cover;
+            mask-image: url(../img/chevron-thin-right.svg); // Path from style.css
+            mask-size: cover;
+            background-image: none;
+        }
     }
 }
 
@@ -381,8 +438,8 @@
         margin-right: auto; //calculate margin to push friend images to the right.
     }
 
-    &__friend {
-
+    &__friends {
+        display: flex;
     }
 
     &__photo {
@@ -393,7 +450,7 @@
         border: 3px solid #fff;
 
         &:not(:last-child) {
-            margin-right: -1.5rem;
+            margin-right: -2rem;
         }
     }
 }
@@ -407,6 +464,11 @@
     margin-bottom: 3.5rem;
     position: relative;
     overflow: hidden;
+
+    @media only screen and (max-width: $bp-medium) {
+        padding: 2rem;
+        margin-bottom: 3rem;
+    }
 
     &__text {
         position: relative;
@@ -458,5 +520,73 @@
         color: var(--color-grey-light-2);
         font-family: sans-serif;
         z-index: 1;
+    }
+}
+
+////////////////////////////////////////////
+// CALL TO ACTION
+.cta {
+    padding: 3.5rem 0;
+    text-align: center;
+
+    @media only screen and (max-width: $bp-medium) {
+        padding: 2.5rem;
+    }
+
+    &__book-now {
+        font-size: 2rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        margin-bottom: 2.5rem;
+    }
+}
+
+.btn {
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    border-radius: 100px;
+    border: none;
+    background-image: linear-gradient(to right, var(--color-primary-ligth), var(--color-primary-dark));
+    color: #fff;
+    position: relative;
+    overflow: hidden; // Hide the text that is outside of the button
+    cursor: pointer;
+
+    // All child elements
+    & > * {
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        transition: all .2s;
+    }
+
+    &__visible {
+        padding: 2rem 7.5rem;
+    }
+
+    &__invisible {
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        top: -100%; // Move up exactly the size of the element
+        padding: 2rem 0;
+    }
+
+    &:hover {
+    background-image: linear-gradient(to left, var(--color-primary-ligth), var(--color-primary-dark));
+    }
+
+    &:hover &__visible {
+        transform: translateY(100%); // Translate down because this one doesn't have absolute pos
+    }
+
+    &:hover &__invisible {
+        top: 0;
+    }
+
+    &:focus {
+        outline: none;
+        animation: pulsate 1s infinite;
     }
 }
